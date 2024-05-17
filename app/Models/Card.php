@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Archivable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ class Card extends Model implements Sortable
 {
     use SortableTrait;
     use HasFactory;
+    use Archivable;
 
     protected $guarded = ['id'];
 
@@ -19,20 +21,6 @@ class Card extends Model implements Sortable
         'order_column_name' => 'order',
         'sort_when_creating' => true,
     ];
-
-    protected $casts = [
-        'archived_at' => 'datetime'
-    ];
-
-    public function scopeNotArchived(Builder $query)
-    {
-        $query->whereNull('cards.archived_at');
-    }
-
-    public function scopeArchived(Builder $query)
-    {
-        $query->whereNotNull('cards.archived_at');
-    }
 
     public function column()
     {

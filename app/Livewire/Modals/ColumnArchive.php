@@ -25,7 +25,7 @@ class ColumnArchive extends ModalComponent
     {
         return view('livewire.modals.column-archive', [
             // @todo order by when archived
-            'columns' => $this->board->columns()->archived()->get()
+            'columns' => $this->board->columns()->archived()->latestArchived()->get()
         ]);
     }
 }
