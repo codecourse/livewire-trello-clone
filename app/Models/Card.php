@@ -18,4 +18,9 @@ class Card extends Model implements Sortable
         'order_column_name' => 'order',
         'sort_when_creating' => true,
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
