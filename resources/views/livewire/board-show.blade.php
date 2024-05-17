@@ -1,8 +1,26 @@
 <div>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $board->title }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ $board->title }}
+            </h2>
+
+            <x-dropdown>
+                <x-slot name="trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
+                </x-slot>
+                <x-slot name="content">
+                    <x-dropdown-button x-on:click="Livewire.dispatch('openModal', { component: 'modals.card-archive', arguments: { board: {{ $board->id }} } })">
+                        Archived cards
+                    </x-dropdown-button>
+                    <x-dropdown-button x-on:click="Livewire.dispatch('openModal', { component: 'modals.column-archive', arguments: { board: {{ $board->id }} } })">
+                        Archived columns
+                    </x-dropdown-button>
+                </x-slot>
+            </x-dropdown>
+        </div>
     </x-slot>
 
     <div class="w-full p-6 overflow-x-scroll">
