@@ -1,0 +1,3 @@
+<div>
+    {{ $card->title }}
+</div>

@@ -11,7 +11,8 @@
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
         "spatie/eloquent-sortable": "^4.3",
-        "spatie/laravel-collection-macros": "^7.14"
+        "spatie/laravel-collection-macros": "^7.14",
+        "wire-elements/modal": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
