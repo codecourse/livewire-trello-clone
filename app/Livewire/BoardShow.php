@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\CreateColumn;
 use App\Models\Board;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Layout;
@@ -10,6 +11,8 @@ use Livewire\Component;
 class BoardShow extends Component
 {
     public Board $board;
+
+    public CreateColumn $createColumnForm;
 
     public function mount()
     {
@@ -21,7 +24,7 @@ class BoardShow extends Component
         $order = collect($items)->pluck('value')->toArray();
 
         \App\Models\Column::setNewOrder($order, 1, 'id', function (Builder $query) {
-            $query->where('user_id', auth()->id());
+            $query->whereBelongsTo(auth()->user());
         });
     }
 
@@ -42,6 +45,20 @@ class BoardShow extends Component
                 $query->where('user_id', auth()->id());
             });
         });
+    }
+
+    public function createColumn()
+    {
+        $this->createColumnForm->validate();
+
+        $column = $this->board->columns()->make($this->createColumnForm->only('title'));
+        $column->user()->associate(auth()->user());
+
+        $column->save();
+
+        $this->createColumnForm->reset();
+
+        $this->dispatch('column-created');
     }
 
     #[Layout('layouts.app')]
