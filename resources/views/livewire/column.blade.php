@@ -33,8 +33,8 @@
         </div>
     </div>
     <div class="p-3 space-y-1.5 pt-0 overflow-y-scroll">
-        @foreach (range(1, random_int(1, 30)) as $card)
-            <livewire:card />
+        @foreach ($cards as $card)
+            <livewire:card wire:key="$card->id" :card="$card" />
         @endforeach
     </div>
     <div class="p-3">create card</div>
