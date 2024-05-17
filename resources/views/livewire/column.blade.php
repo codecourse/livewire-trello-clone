@@ -1,4 +1,4 @@
-<div class="w-[260px] bg-white self-start shrink-0 rounded-lg shadow-sm max-h-full">
+<div class="w-[260px] bg-white self-start shrink-0 rounded-lg shadow-sm max-h-full flex flex-col">
     <div class="flex items-center justify-between">
         <div
             x-data="{ editing: false }"
@@ -6,7 +6,7 @@
             class="h-8 w-full flex items-center px-4 pr-0 min-w-0"
         >
             <button
-                class="text-left w-full"
+                class="text-left w-full font-medium"
                 x-on:click="editing = true"
                 x-show="!editing"
             >
@@ -32,6 +32,10 @@
             </x-dropdown>
         </div>
     </div>
-    <div>cards</div>
-    <div>create card</div>
+    <div class="p-3 space-y-1.5 pt-0 overflow-y-scroll">
+        @foreach (range(1, random_int(1, 30)) as $card)
+            <livewire:card />
+        @endforeach
+    </div>
+    <div class="p-3">create card</div>
 </div>
