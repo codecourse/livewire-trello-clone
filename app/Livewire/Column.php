@@ -14,9 +14,22 @@ class Column extends Component
 
     public CreateCard $createCardForm;
 
+    protected $listeners = [
+        'column-{column.id}-updated' => '$refresh'
+    ];
+
     public function mount()
     {
         $this->editColumnForm->title = $this->column->title;
+    }
+
+    public function archiveColumn()
+    {
+        $this->column->update([
+            'archived_at' => now()
+        ]);
+
+        $this->dispatch('board-updated');
     }
 
     public function updateColumn()
@@ -45,7 +58,7 @@ class Column extends Component
     public function render()
     {
         return view('livewire.column', [
-            'cards' => $this->column->cards()->ordered()->get(),
+            'cards' => $this->column->cards()->ordered()->notArchived()->get(),
         ]);
     }
 }

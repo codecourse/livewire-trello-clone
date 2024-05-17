@@ -17,6 +17,16 @@ class EditCard extends ModalComponent
         $this->editCardForm->fill($this->card->only('title', 'notes'));
     }
 
+    public function archiveCard()
+    {
+        $this->card->update([
+            'archived_at' => now()
+        ]);
+
+        $this->dispatch('column-' . $this->card->column->id . '-updated');
+        $this->dispatch('closeModal');
+    }
+
     public function updateCard()
     {
         $this->editCardForm->validate();

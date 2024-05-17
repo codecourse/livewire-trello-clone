@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
@@ -18,6 +19,15 @@ class Column extends Model implements Sortable
     ];
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'archived_at' => 'datetime'
+    ];
+
+    public function scopeNotArchived(Builder $query)
+    {
+        $query->whereNull('archived_at');
+    }
 
     public function cards()
     {
