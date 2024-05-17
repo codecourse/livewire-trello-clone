@@ -11,7 +11,7 @@ class Column extends Component
     public function render()
     {
         return view('livewire.column', [
-            'cards' => $this->column->cards,
+            'cards' => $this->column->cards()->ordered()->get(),
         ]);
     }
 }

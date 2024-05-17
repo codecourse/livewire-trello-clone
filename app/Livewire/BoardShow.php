@@ -19,7 +19,7 @@ class BoardShow extends Component
     public function render()
     {
         return view('livewire.board-show', [
-            'columns' => $this->board->columns,
+            'columns' => $this->board->columns()->ordered()->get(),
         ]);
     }
 }
