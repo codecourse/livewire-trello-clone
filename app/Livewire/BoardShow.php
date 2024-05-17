@@ -27,7 +27,21 @@ class BoardShow extends Component
 
     public function moved(array $items)
     {
-        dd($items);
+        collect($items)->recursive()->each(function ($column) {
+            $columnId = $column->get('value');
+            $order = $column->get('items')->pluck('value')->toArray();
+
+            \App\Models\Card::where('user_id', auth()->id())
+                ->find($order)
+                ->where('column_id', '!=', $columnId)
+                ->each->update([
+                    'column_id' => $columnId
+                ]);
+
+            \App\Models\Card::setNewOrder($order, 1, 'id', function (Builder $query) {
+                $query->where('user_id', auth()->id());
+            });
+        });
     }
 
     #[Layout('layouts.app')]
