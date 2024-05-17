@@ -25,6 +25,11 @@ class BoardShow extends Component
         });
     }
 
+    public function moved(array $items)
+    {
+        dd($items);
+    }
+
     #[Layout('layouts.app')]
     public function render()
     {
