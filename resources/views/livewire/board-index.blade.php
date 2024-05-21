@@ -7,9 +7,9 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-4 gap-6">
         @foreach($boards as $board)
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-36 flex items-end p-6 text-gray-900 text-lg">
+            <a href="{{ route('boards.show', $board) }}" class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-36 flex items-end p-6 text-gray-900 text-lg">
                 {{ $board->title }}
-            </div>
+            </a>
         @endforeach
 
         <button class="bg-gray-200 overflow-hidden shadow-sm sm:rounded-lg h-36 flex items-center justify-center p-6 text-gray-900 text-lg space-x-1" wire:click="$dispatch('openModal', { component: 'modals.create-board' })">
