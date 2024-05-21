@@ -22,6 +22,11 @@ class Column extends Model implements Sortable
 
     protected $guarded = ['id'];
 
+    public function buildSortQuery(): Builder
+    {
+        return static::query()->where('board_id', $this->board_id);
+    }
+
     public function cards()
     {
         return $this->hasMany(Card::class);
