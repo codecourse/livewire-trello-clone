@@ -19,4 +19,9 @@ class BoardPolicy
     {
         return $user->id === $board->user_id;
     }
+
+    public function createColumn(User $user, Board $board)
+    {
+        return $user->id === $board->user_id;
+    }
 }

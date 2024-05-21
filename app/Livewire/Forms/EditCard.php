@@ -10,6 +10,6 @@ class EditCard extends Form
     #[Validate('required')]
     public string $title = '';
 
-    #[Validate('required')]
+    #[Validate('nullable')]
     public ?string $notes = '';
 }
