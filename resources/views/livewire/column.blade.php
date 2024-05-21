@@ -16,7 +16,7 @@
 
             <template x-if="editing">
                 <form wire:submit="updateColumn" class="-ml-[calc(theme('margin[1.5]')+1px)] grow">
-                    <x-text-input value="Column title" class="h-8 px-1.5 w-full" wire:model="editColumnForm.title" />
+                    <x-text-input value="Column title" class="h-8 px-1.5 w-full" wire:model="editColumnForm.title" x-init="$el.focus()" />
                 </form>
             </template>
         </div>
